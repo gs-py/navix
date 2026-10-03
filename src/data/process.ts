@@ -1,39 +1,44 @@
 export interface ProcessStep {
   id: string
-  index: string
+  letter: string
   title: string
+  tagline: string
   description: string
+  deliverables: string[]
 }
 
+/** The Navix M.O.V.E method. */
 export const processSteps: ProcessStep[] = [
   {
-    id: 'discover',
-    index: '01',
-    title: 'Discover',
-    description: 'We immerse ourselves in your world — your market, your audience, your competition. Deep research and honest conversations lay the groundwork for everything that follows.',
+    id: 'map',
+    letter: 'M',
+    title: 'Map',
+    tagline: 'Research & observation',
+    description: 'We study your market, audience and competitors until the real opportunity is obvious — through data, social listening and honest conversations with your customers.',
+    deliverables: ['Market & audience research', 'Competitor audit', 'Brand health check'],
   },
   {
-    id: 'define',
-    index: '02',
-    title: 'Define',
-    description: 'We distill insights into a clear strategic direction. Brand positioning, messaging frameworks, and creative territories that give your brand a real edge.',
+    id: 'originate',
+    letter: 'O',
+    title: 'Originate',
+    tagline: 'The big idea',
+    description: 'Insight becomes concept. We shape your positioning, creative territories and the one idea every campaign, post and pixel will hang on.',
+    deliverables: ['Positioning & narrative', 'Creative concepts', 'Messaging framework'],
   },
   {
-    id: 'create',
-    index: '03',
-    title: 'Create',
-    description: 'Strategy meets craft. We design, write, build, and produce — creating work that is bold, purposeful, and impossible to scroll past.',
+    id: 'visualise',
+    letter: 'V',
+    title: 'Visualise',
+    tagline: 'Design & production',
+    description: 'Identity, content, campaigns and web — crafted for each platform and produced in-house so the idea lands with the same force everywhere.',
+    deliverables: ['Identity systems', 'Content & UGC production', 'Websites & landing pages'],
   },
   {
-    id: 'launch',
-    index: '04',
-    title: 'Launch',
-    description: 'We deploy with precision across every channel. Paid media, organic content, web experiences — all orchestrated for maximum impact from day one.',
-  },
-  {
-    id: 'grow',
-    index: '05',
-    title: 'Grow',
-    description: 'Launch is the beginning. We optimize, iterate, and scale — turning initial traction into sustained, measurable growth.',
+    id: 'execute',
+    letter: 'E',
+    title: 'Execute',
+    tagline: 'Launch, measure, scale',
+    description: 'We launch across every channel, then optimise every week — scaling what works, cutting what doesn’t and reporting on the numbers that matter.',
+    deliverables: ['Media & launch plan', 'Performance dashboards', 'Ongoing optimisation'],
   },
 ]

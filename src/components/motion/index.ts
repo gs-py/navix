@@ -1,9 +1,16 @@
-export * from './FadeUp';
-export * from './RevealText';
-export * from './SplitText';
-export * from './SectionReveal';
-export * from './MagneticButton';
-export * from './Marquee';
-export * from './AnimatedCounter';
-export * from './ParallaxImage';
-export * from './ImageReveal';
+export { FadeUp } from './FadeUp'
+export { RevealText } from './RevealText'
+export { SplitText } from './SplitText'
+export { MagneticButton } from './MagneticButton'
+export { ImageReveal } from './ImageReveal'
+export { ParallaxImage } from './ParallaxImage'
+export { Marquee } from './Marquee'
+export { AnimatedCounter } from './AnimatedCounter'
+export { SectionReveal } from './SectionReveal'
+export { CharsIn } from './CharsIn'
+export { FlipLines } from './FlipLines'
+export { WordsIn } from './WordsIn'
+export { PageLines } from './PageLines'
+export { BounceIn } from './BounceIn'
+export { CircleButton } from './CircleButton'
+export { ScrollRevealText } from './ScrollRevealText'
