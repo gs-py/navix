@@ -12,10 +12,19 @@ export const siteConfig = {
     behance: 'https://behance.net/navix',
     dribbble: 'https://dribbble.com/navix',
   },
+  founder: {
+    name: 'Abel James',
+    role: 'Founder, Navix',
+    /** Transparent-background cutout works best — the portrait breaks out of the frame. */
+    image: '/founder.png',
+    linkedin: '',
+  },
+  /** Showreel video URL (mp4 / YouTube embed). Leave empty to show the animated brand reel. */
+  showreel: '',
   navigation: [
+    { label: 'Agency', href: '#about' },
+    { label: 'Solutions', href: '#services' },
     { label: 'Work', href: '#work' },
-    { label: 'Services', href: '#services' },
-    { label: 'About', href: '#about' },
     { label: 'Insights', href: '#insights' },
     { label: 'Contact', href: '#contact' },
   ],

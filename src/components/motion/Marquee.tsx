@@ -4,6 +4,7 @@ import { useReducedMotion } from '../../hooks';
 interface MarqueeProps {
   children: React.ReactNode;
   className?: string;
+  /** Seconds for one full loop. */
   speed?: number;
   pauseOnHover?: boolean;
   direction?: 'left' | 'right';
@@ -17,36 +18,21 @@ export const Marquee: React.FC<MarqueeProps> = ({
   direction = 'left'
 }) => {
   const prefersReducedMotion = useReducedMotion();
+  const trackStyle: React.CSSProperties = prefersReducedMotion
+    ? {}
+    : {
+        animation: `navix-marquee ${speed}s linear infinite`,
+        animationDirection: direction === 'right' ? 'reverse' : 'normal',
+      };
+  const trackClass = `flex shrink-0 min-w-full ${pauseOnHover ? 'group-hover/marquee:[animation-play-state:paused]' : ''}`;
 
   return (
-    <div className={`overflow-hidden flex w-full group ${className}`}>
-      <style>{`
-        @keyframes marquee {
-          0% { transform: translateX(0%); }
-          100% { transform: translateX(-100%); }
-        }
-        .animate-marquee {
-          animation: marquee ${speed}s linear infinite;
-        }
-        .animate-marquee[data-direction="right"] {
-          animation-direction: reverse;
-        }
-        .group:hover .pause-on-hover {
-          animation-play-state: paused;
-        }
-      `}</style>
-      <div 
-        className={`flex shrink-0 min-w-full ${prefersReducedMotion ? '' : 'animate-marquee'} ${pauseOnHover ? 'pause-on-hover' : ''}`}
-        data-direction={direction}
-      >
+    <div className={`overflow-hidden flex w-full group/marquee ${className}`}>
+      <div className={trackClass} style={trackStyle}>
         {children}
       </div>
       {!prefersReducedMotion && (
-        <div 
-          className={`flex shrink-0 min-w-full animate-marquee ${pauseOnHover ? 'pause-on-hover' : ''}`}
-          data-direction={direction}
-          aria-hidden="true"
-        >
+        <div className={trackClass} style={trackStyle} aria-hidden="true">
           {children}
         </div>
       )}

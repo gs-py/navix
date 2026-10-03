@@ -1,95 +1,93 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FadeUp, SectionReveal } from '../motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { AnimatedCounter, BounceIn, CharsIn, PageLines, WordsIn } from '../motion';
+import { SectionLabel } from '../graphics/SectionLabel';
+import { EASE_OUT_EXPO } from '../../lib/intro';
 
-const philosophyItems = [
-  {
-    title: "Strategy Before Noise",
-    content: "We don't start with tactics. We start with understanding — your market, your audience, your real competitive advantage."
-  },
-  {
-    title: "Creativity With Purpose",
-    content: "Every creative decision serves a strategic goal. Beautiful work that doesn't perform isn't beautiful to us."
-  },
-  {
-    title: "Culture-First Thinking",
-    content: "We build brands that tap into culture, not just trends. Trends fade. Cultural relevance compounds."
-  },
-  {
-    title: "Measurable Outcomes",
-    content: "We're allergic to vanity metrics. Every campaign is measured against real business outcomes."
-  },
-  {
-    title: "Long-Term Partnerships",
-    content: "We don't do one-off projects. We build relationships that grow your brand over years, not weeks."
-  }
+const BELIEFS = [
+  { value: 95, title: 'Creativity', text: 'Ideas with a point of view, built to reach the right audience — never decoration for its own sake.' },
+  { value: 90, title: 'Consistency', text: 'Promises kept and deliverables on time, every month. Momentum is a strategy.' },
+  { value: 100, title: 'Coffee', text: 'Yes, coffee. We brainstorm, plan and create — all of it fuelled by far too much filter coffee.' },
 ];
 
-export const WhyNavix = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+const STATS = [
+  { target: 50, suffix: '+', label: 'Brands transformed' },
+  { target: 120, suffix: '+', label: 'Campaigns launched' },
+  { target: 10, suffix: 'M+', label: 'People reached' },
+  { target: 90, suffix: '%', label: 'Client retention' },
+];
 
-  const toggleItem = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+const BeliefBar = ({ value, title, text, delay }: { value: number; title: string; text: string; delay: number }) => (
+  <div className="py-7 border-t border-white/10">
+    <div className="flex items-baseline justify-between mb-4">
+      <h3 className="font-[family-name:var(--font-display)] font-bold text-2xl text-[#F7F7F7]">{title}</h3>
+      <span className="font-mono text-sm text-[#13FF00]">
+        <AnimatedCounter target={value} suffix="%" duration={1.8} />
+      </span>
+    </div>
+    <div className="relative h-[3px] bg-white/10 overflow-hidden">
+      <motion.div
+        className="absolute inset-y-0 left-0 bg-[#13FF00]"
+        initial={{ width: '0%' }}
+        whileInView={{ width: `${value}%` }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.8, ease: EASE_OUT_EXPO, delay }}
+      />
+    </div>
+    <p className="mt-4 text-[#888888] leading-relaxed max-w-md">{text}</p>
+  </div>
+);
+
+export const WhyNavix = () => {
+  const bandRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: bandRef, offset: ['start end', 'end start'] });
+  const x = useTransform(scrollYProgress, [0, 1], ['6%', '-6%']);
 
   return (
-    <section className="bg-[#000000] py-24 lg:py-40 px-8 lg:px-16 relative overflow-hidden">
-      <SectionReveal>
-        <div className="max-w-7xl mx-auto">
-          <FadeUp>
-            <h2 className="mb-16 lg:mb-24">
-              <span className="text-display-lg text-[#F7F7F7] uppercase block">WHY</span>
-              <span className="text-display-lg text-[#F7F7F7] uppercase block">
-                NAVIX<span className="text-[#13FF00]">?</span>
-              </span>
-            </h2>
-          </FadeUp>
+    <section id="why" className="relative bg-black text-[#F7F7F7] overflow-hidden">
+      {/* Green statement band */}
+      <div ref={bandRef} className="relative bg-[#13FF00] text-black py-10 lg:py-14 overflow-hidden">
+        <motion.h2
+          style={{ x }}
+          className="font-[family-name:var(--font-display)] font-black uppercase text-center leading-[0.85] tracking-[-0.045em] text-[17vw] lg:text-[13.5vw] whitespace-nowrap"
+        >
+          <CharsIn text="Why" className="block" stagger={0.08} />
+          <CharsIn text="choose us" className="block" stagger={0.05} delay={0.2} />
+        </motion.h2>
+      </div>
 
-          <div className="w-full">
-            {philosophyItems.map((item, index) => {
-              const isOpen = openIndex === index;
-              return (
-                <div 
-                  key={index} 
-                  className={`border-t border-[#2A2A2A] relative ${index === philosophyItems.length - 1 ? 'border-b' : ''}`}
-                >
-                  <div 
-                    className="py-8 flex justify-between items-center cursor-pointer group"
-                    onClick={() => toggleItem(index)}
-                  >
-                    <h3 className="text-heading-md text-[#F7F7F7] font-[family-name:var(--font-display)] relative z-10">
-                      {item.title}
-                    </h3>
-                    <div className={`text-[#13FF00] text-2xl transition-transform duration-300 relative z-10 ${isOpen ? 'rotate-45' : ''}`}>
-                      +
-                    </div>
-                  </div>
-                  
-                  <AnimatePresence>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                        className="overflow-hidden"
-                      >
-                        <p className="text-body-lg text-[#888888] max-w-2xl pb-8 relative z-10">
-                          {item.content}
-                        </p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                  
-                  <div className="text-[15vw] font-[family-name:var(--font-display)] font-[900] text-[#F7F7F7]/[0.02] absolute right-0 top-0 pointer-events-none select-none leading-none z-0">
-                    0{index + 1}
-                  </div>
-                </div>
-              );
-            })}
+      <div className="relative py-24 lg:py-36">
+        <PageLines />
+        <div className="container-x relative grid lg:grid-cols-12 gap-14 lg:gap-16">
+          <div className="lg:col-span-5">
+            <SectionLabel index="08" label="Why Navix" className="mb-8" />
+            <p className="font-[family-name:var(--font-display)] text-xl uppercase text-[#888888]">Why</p>
+            <h3 className="font-[family-name:var(--font-display)] font-extrabold uppercase text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.9] tracking-tight mt-2">
+              We believe<span className="text-[#13FF00]">.</span>
+            </h3>
+            <WordsIn
+              className="mt-8 text-body-lg text-[#888888] leading-relaxed"
+              text="We're driven by creativity, innovation and a genuine obsession with your growth. Strategy before noise, craft with purpose, and outcomes you can measure — that's the deal."
+            />
+          </div>
+          <div className="lg:col-span-7">
+            {BELIEFS.map((belief, i) => (
+              <BeliefBar key={belief.title} {...belief} delay={0.2 + i * 0.15} />
+            ))}
           </div>
         </div>
-      </SectionReveal>
+
+        <div className="container-x relative mt-20 lg:mt-28 grid grid-cols-2 lg:grid-cols-4 border-t border-l border-white/10">
+          {STATS.map((stat, i) => (
+            <BounceIn key={stat.label} delay={i * 0.18} className="border-r border-b border-white/10 p-6 md:p-10">
+              <p className="font-[family-name:var(--font-display)] font-black text-[clamp(3rem,6vw,5.5rem)] leading-none tracking-tight">
+                <AnimatedCounter target={stat.target} suffix={stat.suffix} />
+              </p>
+              <p className="mt-4 text-sm uppercase tracking-[0.15em] text-[#888888]">{stat.label}</p>
+            </BounceIn>
+          ))}
+        </div>
+      </div>
     </section>
   );
 };

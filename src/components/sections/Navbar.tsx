@@ -1,167 +1,183 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { motion, AnimatePresence, useMotionValueEvent, useScroll } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
 import { siteConfig } from '../../data/siteConfig';
 import { NavixLogo } from '../common/NavixLogo';
-import { MagneticButton } from '../motion/MagneticButton';
+import { getLenis } from '../../hooks';
+import { INTRO_DELAY, EASE_OUT_EXPO } from '../../lib/intro';
+
+/** Text that rolls up to a duplicate of itself on hover. */
+const RollText = ({ children }: { children: string }) => (
+  <span className="relative inline-flex overflow-hidden">
+    <span className="transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full">
+      {children}
+    </span>
+    <span
+      aria-hidden="true"
+      className="absolute inset-0 translate-y-full text-[#13FF00] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0"
+    >
+      {children}
+    </span>
+  </span>
+);
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, 'change', (y) => {
+    const previous = scrollY.getPrevious() ?? 0;
+    setIsScrolled(y > 40);
+    setIsHidden(y > 400 && y > previous && !isMenuOpen);
+  });
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    const lenis = getLenis();
+    if (isMenuOpen) lenis?.stop();
+    else lenis?.start();
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setIsMenuOpen(false);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isMenuOpen]);
 
-  // Use siteConfig navigation or fallback if it's structured differently
-  const links = siteConfig?.navigation || [
-    { label: 'Work', href: '#work' },
-    { label: 'Services', href: '#services' },
-    { label: 'About', href: '#about' },
-    { label: 'Insights', href: '#insights' },
-    { label: 'Contact', href: '#contact' },
-  ];
-
-  const menuVariants = {
-    closed: {
-      clipPath: 'circle(0px at calc(100% - 64px) 44px)',
-      opacity: 0,
-      transition: {
-        type: 'spring' as const,
-        stiffness: 400,
-        damping: 40,
-      }
-    },
-    open: {
-      clipPath: 'circle(150% at calc(100% - 64px) 44px)',
-      opacity: 1,
-      transition: {
-        type: 'spring' as const,
-        stiffness: 20,
-        restDelta: 2,
-        opacity: { duration: 0.2 }
-      }
-    }
-  };
-
-  const linkVariants = {
-    closed: { y: 20, opacity: 0 },
-    open: (i: number) => ({
-      y: 0,
-      opacity: 1,
-      transition: {
-        delay: 0.1 + i * 0.1,
-        duration: 0.4,
-        ease: [0.25, 0.1, 0.25, 1] as const,
-      }
-    })
-  };
+  const links = siteConfig.navigation;
 
   return (
     <>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? 'bg-black/80 backdrop-blur-md border-b border-grey-800/50 py-4' : 'bg-transparent py-5 lg:py-8'
-        } px-8 lg:px-16`}
+      <motion.header
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: isHidden ? -110 : 0, opacity: 1 }}
+        transition={{ duration: 0.7, ease: EASE_OUT_EXPO, delay: isHidden || isScrolled ? 0 : INTRO_DELAY - 0.2 }}
+        className={`fixed top-0 inset-x-0 z-[120] transition-[background-color,border-color,padding] duration-500 border-b ${
+          isScrolled && !isMenuOpen ? 'bg-black/70 backdrop-blur-xl border-white/[0.06] py-3' : 'bg-transparent border-transparent py-5 lg:py-7'
+        }`}
       >
-        <div className="flex items-center justify-between">
-          <div className="z-[101]">
+        <nav className="container-x flex items-center justify-between" aria-label="Primary">
+          <a href="#top" aria-label="Navix home" onClick={() => setIsMenuOpen(false)}>
             <NavixLogo variant="light" size="md" />
-          </div>
+          </a>
 
-          {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center space-x-8">
-            {links.map((link, index) => (
-              <a
-                key={index}
-                href={link.href}
-                className="text-sm font-[family-name:var(--font-body)] font-medium uppercase tracking-[0.1em] text-grey-300 hover:text-white transition-colors relative group"
-              >
-                {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#13FF00] transition-all duration-300 group-hover:w-full"></span>
-              </a>
+          <ul className="hidden lg:flex items-center gap-12 xl:gap-16">
+            {links.map((link) => (
+              <li key={link.href}>
+                <a href={link.href} className="group text-[15px] font-medium text-[#F7F7F7]">
+                  <RollText>{link.label}</RollText>
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
 
-          <div className="hidden lg:block">
-            <MagneticButton>
-              <a href="#start" className="inline-block border border-[#13FF00] text-[#13FF00] px-6 py-3 text-sm uppercase tracking-wider hover:bg-[#13FF00] hover:text-black transition-all duration-300">
-                Start a Project
-              </a>
-            </MagneticButton>
-          </div>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden z-[101] text-white p-2 focus:outline-none"
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
-        </div>
-      </motion.nav>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial="closed"
-            animate="open"
-            exit="closed"
-            variants={menuVariants}
-            className="fixed inset-0 bg-black z-[100] flex flex-col justify-center px-8 lg:px-16"
-          >
-            <div className="flex flex-col space-y-6">
-              {links.map((link, i) => (
-                <motion.div
-                  key={i}
-                  custom={i}
-                  variants={linkVariants}
-                  initial="closed"
-                  animate="open"
-                  exit="closed"
-                  className="overflow-hidden"
-                >
-                  <a
-                    href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-display-md font-[family-name:var(--font-display)] text-white hover:text-[#13FF00] transition-colors relative group inline-block uppercase leading-tight"
-                  >
-                    {link.label}
-                    <span className="absolute bottom-2 left-0 w-0 h-1 bg-[#13FF00] transition-all duration-300 group-hover:w-full"></span>
-                  </a>
-                </motion.div>
-              ))}
-            </div>
-
-            <motion.div 
-              className="mt-16 pt-8 border-t border-grey-800/50 flex flex-col space-y-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
+          <div className="flex items-center gap-5">
+            <a
+              href="#contact"
+              className="group hidden md:inline-flex items-center gap-2 rounded-full bg-[#13FF00] text-black pl-5 pr-2 py-2 text-sm font-semibold font-[family-name:var(--font-display)] transition-colors hover:bg-[#F7F7F7]"
             >
-              <a href={`mailto:${siteConfig.email}`} className="text-body-md font-[family-name:var(--font-body)] text-grey-400 hover:text-white transition-colors">
-                {siteConfig.email}
-              </a>
-              <a href={`tel:${siteConfig.phone}`} className="text-body-md font-[family-name:var(--font-body)] text-grey-400 hover:text-white transition-colors">
-                {siteConfig.phone}
-              </a>
-              <div className="flex space-x-6 mt-4">
-                {Object.entries(siteConfig.social).map(([label, href]) => (
-                  <a key={label} href={href} className="text-sm font-[family-name:var(--font-body)] uppercase tracking-wider text-white hover:text-[#13FF00] transition-colors">
-                    {label}
-                  </a>
-                ))}
+              Let's talk
+              <span className="w-7 h-7 rounded-full bg-black text-[#13FF00] flex items-center justify-center transition-transform duration-500 group-hover:rotate-45">
+                <ArrowUpRight size={15} />
+              </span>
+            </a>
+            <span className="hidden md:block w-px h-6 bg-white/30" />
+            <button
+              type="button"
+              onClick={() => setIsMenuOpen((open) => !open)}
+              aria-expanded={isMenuOpen}
+              className="w-11 h-11 rounded-full flex flex-col items-end justify-center gap-[6px] pr-2.5 text-white"
+            >
+              <span className="sr-only">{isMenuOpen ? 'Close menu' : 'Open menu'}</span>
+              <span className={`block h-[2px] bg-current transition-all duration-500 ${isMenuOpen ? 'w-6 translate-y-[4px] rotate-45' : 'w-6'}`} />
+              <span className={`block h-[2px] bg-current transition-all duration-500 ${isMenuOpen ? 'w-6 -translate-y-[4px] -rotate-45' : 'w-4'}`} />
+            </button>
+          </div>
+        </nav>
+      </motion.header>
+
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            key="menu"
+            className="fixed inset-0 z-[110] bg-black overflow-hidden"
+            initial={{ clipPath: 'circle(0% at calc(100% - 60px) 48px)' }}
+            animate={{ clipPath: 'circle(150% at calc(100% - 60px) 48px)' }}
+            exit={{ clipPath: 'circle(0% at calc(100% - 60px) 48px)' }}
+            transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
+            data-lenis-prevent
+          >
+            {/* Decorative green ribbon */}
+            <motion.svg
+              aria-hidden="true"
+              viewBox="0 0 600 600"
+              className="absolute -right-40 -bottom-40 w-[60vh] h-[60vh] text-[#13FF00] opacity-90"
+              initial={{ opacity: 0, rotate: -10 }}
+              animate={{ opacity: 1, rotate: 0 }}
+              transition={{ duration: 1.2, ease: EASE_OUT_EXPO, delay: 0.3 }}
+            >
+              <motion.path
+                d="M620 120 H420 C370 120 340 135 310 170 L40 620"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="80"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 1.4, ease: EASE_OUT_EXPO, delay: 0.35 }}
+              />
+            </motion.svg>
+
+            <div className="container-x relative h-full flex flex-col justify-center pt-24 pb-10">
+              <div className="grid lg:grid-cols-12 gap-12">
+                <ul className="lg:col-span-8 flex flex-col gap-1">
+                  {links.map((link, i) => (
+                    <li key={link.href} className="overflow-hidden">
+                      <motion.a
+                        href={link.href}
+                        onClick={() => setIsMenuOpen(false)}
+                        className="group flex items-baseline gap-5 py-1"
+                        initial={{ y: '110%' }}
+                        animate={{ y: 0 }}
+                        exit={{ y: '110%' }}
+                        transition={{ duration: 0.8, ease: EASE_OUT_EXPO, delay: 0.25 + i * 0.07 }}
+                      >
+                        <span className="font-mono text-xs text-[#13FF00]">0{i + 1}</span>
+                        <span className="text-[13vw] sm:text-[10vw] lg:text-[6.5vw] font-[family-name:var(--font-display)] font-extrabold uppercase leading-[0.95] tracking-tight text-[#F7F7F7] transition-[color,transform] duration-500 group-hover:text-[#13FF00] group-hover:translate-x-4">
+                          {link.label}
+                        </span>
+                      </motion.a>
+                    </li>
+                  ))}
+                </ul>
+
+                <motion.div
+                  className="lg:col-span-4 flex flex-col justify-end gap-8 text-[#888888]"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                >
+                  <div>
+                    <p className="text-caption mb-3">Get in touch</p>
+                    <a href={`mailto:${siteConfig.email}`} className="block text-xl text-[#F7F7F7] hover:text-[#13FF00] transition-colors">
+                      {siteConfig.email}
+                    </a>
+                    <a href={`tel:${siteConfig.phone.replace(/\s/g, '')}`} className="block text-xl text-[#F7F7F7] hover:text-[#13FF00] transition-colors mt-1">
+                      {siteConfig.phone}
+                    </a>
+                  </div>
+                  <div>
+                    <p className="text-caption mb-3">Studio</p>
+                    <p className="text-[#F7F7F7]">{siteConfig.location}</p>
+                  </div>
+                  <div className="flex flex-wrap gap-x-6 gap-y-2">
+                    {Object.entries(siteConfig.social).map(([label, href]) => (
+                      <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="text-sm uppercase tracking-wider text-[#F7F7F7] hover:text-[#13FF00] transition-colors">
+                        {label}
+                      </a>
+                    ))}
+                  </div>
+                </motion.div>
               </div>
-            </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -1,3 +1,5 @@
 export { useReducedMotion } from './useReducedMotion'
 export { useIsMobile } from './useIsMobile'
 export { useSmoothScroll } from './useSmoothScroll'
+export { useLenis, getLenis } from './useLenis'
+export { useMediaQuery } from './useMediaQuery'

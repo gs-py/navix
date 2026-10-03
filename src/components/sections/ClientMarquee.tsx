@@ -1,32 +1,63 @@
-import { Fragment } from 'react';
-import { Marquee } from '../motion';
+import { motion } from 'framer-motion';
+import { FlipLines, PageLines } from '../motion';
+import { SectionLabel } from '../graphics/SectionLabel';
+import { EASE_OUT_EXPO } from '../../lib/intro';
 
-const BRANDS = ["ACME", "VERTEX", "NOMAD", "ATLAS", "FORGE", "EMBER", "ONYX", "APEX"];
+/* Placeholder client marks set in type until real logo files are supplied. */
+const CLIENTS: { name: string; className: string; mark?: string }[] = [
+  { name: 'Noir Beauty', className: 'font-[family-name:var(--font-display)] font-light tracking-[0.35em] uppercase text-lg' },
+  { name: 'the grand', className: 'font-serif italic text-3xl' },
+  { name: 'PULSE', className: 'font-[family-name:var(--font-display)] font-black text-3xl tracking-tight', mark: '●' },
+  { name: 'Root & Branch', className: 'font-[family-name:var(--font-display)] font-semibold text-xl' },
+  { name: 'DRIFT', className: 'font-mono font-bold text-2xl tracking-[0.2em]' },
+  { name: 'hexa', className: 'font-[family-name:var(--font-display)] font-extrabold text-3xl lowercase', mark: '⬡' },
+  { name: 'VERTEX', className: 'font-[family-name:var(--font-display)] font-black italic text-2xl' },
+  { name: 'Nomad', className: 'font-serif text-3xl tracking-tight' },
+  { name: 'ATLAS', className: 'font-[family-name:var(--font-display)] font-medium tracking-[0.5em] text-lg' },
+  { name: 'forge', className: 'font-[family-name:var(--font-display)] font-black text-3xl lowercase tracking-tighter', mark: '▲' },
+  { name: 'EMBER', className: 'font-[family-name:var(--font-display)] font-bold tracking-[0.25em] text-xl' },
+  { name: 'Onyx', className: 'font-serif italic font-bold text-3xl' },
+];
 
+/** "Partners in growth" — a logo wall whose cells flood green on hover. */
 export function ClientMarquee() {
   return (
-    <section className="bg-[#000000] py-16 lg:py-24 border-y border-[#2A2A2A]">
-      <div className="container mx-auto px-8 lg:px-16">
-        <h2 className="text-caption text-[#888888] text-center mb-12 uppercase tracking-widest">
-          Trusted by brands that move forward
-        </h2>
-      </div>
-      
-      <div className="w-full overflow-hidden flex">
-        <Marquee>
-          <div className="flex items-center">
-            {BRANDS.map((brand, i) => (
-              <Fragment key={i}>
-                <div className="text-2xl lg:text-3xl font-[family-name:var(--font-display)] font-bold text-[#888888]/30 mx-8 lg:mx-16 uppercase tracking-wider select-none hover:text-[#888888]/60 transition-colors duration-300">
-                  {brand}
-                </div>
-                <div className="text-[#13FF00]/30 text-2xl lg:text-3xl font-[family-name:var(--font-display)] select-none">
-                  ×
-                </div>
-              </Fragment>
-            ))}
+    <section aria-labelledby="clients-title" className="relative bg-black py-24 lg:py-36 overflow-hidden">
+      <PageLines />
+      <div className="container-x relative">
+        <div className="grid lg:grid-cols-12 gap-8 items-end mb-14 lg:mb-20">
+          <div className="lg:col-span-8">
+            <SectionLabel index="05" label="Partners in growth" className="mb-8" />
+            <h2 id="clients-title" className="font-[family-name:var(--font-display)] font-extrabold uppercase tracking-tight text-[clamp(2.25rem,5vw,4.5rem)] leading-[0.92] text-[#F7F7F7]">
+              <FlipLines lines={['Brands that chose', <>to move with us<span className="text-[#13FF00]">.</span></>]} />
+            </h2>
           </div>
-        </Marquee>
+          <p className="lg:col-span-4 text-[#888888] leading-relaxed">
+            From first-time founders to category leaders across beauty, hospitality, tech, D2C and healthcare.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 border-l border-t border-white/10">
+          {CLIENTS.map((client, i) => (
+            <motion.div
+              key={client.name}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.8, ease: EASE_OUT_EXPO, delay: (i % 4) * 0.08 + Math.floor(i / 4) * 0.12 }}
+              className="group relative h-28 md:h-36 lg:h-40 border-r border-b border-white/10 flex items-center justify-center overflow-hidden cursor-default"
+            >
+              <span className="absolute inset-0 bg-[#13FF00] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+              <span className={`relative flex items-center gap-2 text-[#F7F7F7]/45 group-hover:text-black transition-colors duration-300 ${client.className}`}>
+                {client.mark && <span className="text-[0.7em]">{client.mark}</span>}
+                {client.name}
+              </span>
+              <span className="absolute top-3 left-3 font-mono text-[10px] text-white/20 group-hover:text-black/50 transition-colors">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

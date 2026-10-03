@@ -22,7 +22,7 @@ export const projects: Project[] = [
     year: '2024',
     image: '/placeholder-project-1.jpg',
     layout: 'landscape',
-    color: '#1a1a2e',
+    color: '#43234f',
   },
   {
     id: 'the-grand',
@@ -34,7 +34,7 @@ export const projects: Project[] = [
     year: '2024',
     image: '/placeholder-project-2.jpg',
     layout: 'portrait',
-    color: '#2d2016',
+    color: '#5a3a1a',
   },
   {
     id: 'pulse',
@@ -46,7 +46,7 @@ export const projects: Project[] = [
     year: '2023',
     image: '/placeholder-project-3.jpg',
     layout: 'full',
-    color: '#0a1628',
+    color: '#10305e',
   },
   {
     id: 'root-branch',
@@ -58,7 +58,7 @@ export const projects: Project[] = [
     year: '2023',
     image: '/placeholder-project-4.jpg',
     layout: 'split',
-    color: '#1a2e1a',
+    color: '#1e4a2a',
   },
   {
     id: 'drift',
@@ -70,7 +70,7 @@ export const projects: Project[] = [
     year: '2024',
     image: '/placeholder-project-5.jpg',
     layout: 'landscape',
-    color: '#1e1e2a',
+    color: '#2b3a52',
   },
   {
     id: 'hexa',
@@ -82,6 +82,6 @@ export const projects: Project[] = [
     year: '2024',
     image: '/placeholder-project-6.jpg',
     layout: 'portrait',
-    color: '#161622',
+    color: '#33296b',
   },
 ]

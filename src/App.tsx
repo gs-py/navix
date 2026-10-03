@@ -1,42 +1,49 @@
-import { CursorProvider } from './components/common'
+import { CursorProvider, Preloader } from './components/common'
 import {
   Navbar,
   Hero,
-  ClientMarquee,
+  XTicker,
   About,
+  Founder,
   Services,
-  MotionInterlude,
-  SelectedWork,
   Process,
-  Impact,
+  ClientMarquee,
   Testimonials,
+  SelectedWork,
   WhyNavix,
-  Insights,
   LargeCTA,
+  Insights,
   Contact,
+  FAQ,
   Footer,
 } from './components/sections'
+import { useLenis } from './hooks'
 
 function App() {
+  useLenis()
+
   return (
     <CursorProvider>
+      <Preloader />
       <Navbar />
       <main>
         <Hero />
-        <ClientMarquee />
+        <XTicker />
         <About />
+        <Founder />
         <Services />
-        <MotionInterlude />
-        <SelectedWork />
         <Process />
-        <Impact />
+        <ClientMarquee />
         <Testimonials />
+        <SelectedWork />
         <WhyNavix />
-        <Insights />
         <LargeCTA />
+        <Insights />
         <Contact />
+        <FAQ />
       </main>
       <Footer />
+      <div className="grain" aria-hidden="true" />
     </CursorProvider>
   )
 }
