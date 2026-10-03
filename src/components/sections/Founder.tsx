@@ -1,78 +1,39 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
-import { CharsIn, FlipLines, PageLines, WordsIn } from '../motion';
-import { NavixLogo } from '../common';
+import { FlipLines, PageLines, WordsIn } from '../motion';
 import { SectionLabel } from '../graphics/SectionLabel';
 import { siteConfig } from '../../data';
 import { EASE_OUT_EXPO } from '../../lib/intro';
 
 const { founder } = siteConfig;
-const [firstName, ...rest] = founder.name.split(' ');
-const lastName = rest.join(' ');
+const [firstName] = founder.name.split(' ');
 
-/** Founder card: portrait rises out of a green frame that draws itself, name set over the body. */
+/** Founder card artwork (frame, name and logo are part of the image): wipes up into view, eases in scale on scroll. */
 const FounderCard = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const [imageFailed, setImageFailed] = useState(false);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const portraitY = useTransform(scrollYProgress, [0, 1], ['6%', '-4%']);
+  const scale = useTransform(scrollYProgress, [0, 1], [1.12, 1]);
 
+  // The in-view trigger sits on an unclipped wrapper: a fully clipped element reads as zero-area to the observer.
   return (
-    <div
-      ref={ref}
-      className="relative aspect-[4/5] w-full max-w-[540px] mx-auto overflow-hidden"
-      style={{ background: 'radial-gradient(90% 70% at 50% 35%, #161C28 0%, #0B0E14 70%, #08090C 100%)' }}
-    >
-      <div className="absolute top-[7%] right-[9%] z-30">
-        <NavixLogo size="md" />
-      </div>
-
-      {/* Frame */}
-      <svg viewBox="0 0 400 500" className="absolute inset-0 w-full h-full z-10" aria-hidden="true" preserveAspectRatio="none">
-        <motion.rect
-          x="58" y="130" width="284" height="316" rx="12"
-          fill="none" stroke="#13FF00" strokeWidth="1.5" vectorEffect="non-scaling-stroke"
-          initial={{ pathLength: 0 }}
-          whileInView={{ pathLength: 1 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 2, ease: EASE_OUT_EXPO }}
-        />
-      </svg>
-
-      {/* Portrait (bottom edge sits on the frame's bottom line; head breaks out above it) */}
+    <motion.div ref={ref} className="w-full max-w-[540px] mx-auto" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }}>
       <motion.div
-        className="absolute left-[14.5%] right-[14.5%] bottom-[10.8%] top-[13%] z-20 flex items-end justify-center"
-        style={{ y: portraitY }}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: '-80px' }}
-        transition={{ duration: 1.2, ease: EASE_OUT_EXPO, delay: 0.4 }}
+        className="relative aspect-[4/5] w-full overflow-hidden bg-[#0B0E14]"
+        variants={{ hidden: { clipPath: 'inset(100% 0% 0% 0%)' }, visible: { clipPath: 'inset(0% 0% 0% 0%)' } }}
+        transition={{ duration: 1.4, ease: EASE_OUT_EXPO }}
       >
-        {!imageFailed ? (
-          <img
-            src={founder.image}
-            alt={`${founder.name}, ${founder.role}`}
-            className="h-full w-auto max-w-none object-contain object-bottom"
-            onError={() => setImageFailed(true)}
-            loading="lazy"
-          />
-        ) : (
-          <div className="w-full h-[78%] flex items-center justify-center" aria-label={founder.name} role="img">
-            <span className="font-[family-name:var(--font-display)] font-black text-[9rem] md:text-[11rem] leading-none tracking-tighter text-[#13FF00]/25">
-              {firstName[0]}
-              {lastName[0]}
-            </span>
-          </div>
-        )}
+        <motion.img
+          src={founder.image}
+          alt={`${founder.name}, ${founder.role}`}
+          width={1080}
+          height={1350}
+          loading="lazy"
+          className="w-full h-full object-cover"
+          style={{ scale }}
+        />
       </motion.div>
-
-      {/* Name */}
-      <p className="absolute left-[17%] bottom-[13%] z-30 font-[family-name:var(--font-display)] font-bold text-[#F7F7F7] leading-[0.95] tracking-tight text-[clamp(2.5rem,6vw,4.25rem)] drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
-        <CharsIn text={firstName} className="block" stagger={0.06} delay={0.6} />
-        <CharsIn text={lastName} className="block" stagger={0.06} delay={0.85} />
-      </p>
-    </div>
+    </motion.div>
   );
 };
 

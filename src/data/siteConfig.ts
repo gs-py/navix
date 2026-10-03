@@ -15,7 +15,7 @@ export const siteConfig = {
   founder: {
     name: 'Abel James',
     role: 'Founder, Navix',
-    /** Transparent-background cutout works best — the portrait breaks out of the frame. */
+    /** Finished 4:5 founder card (frame, name and logo are baked into the artwork). */
     image: '/founder.png',
     linkedin: '',
   },
