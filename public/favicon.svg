@@ -1,5 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="4" fill="#000000"/>
-  <text x="3" y="24" font-family="Arial, sans-serif" font-weight="bold" font-size="20" fill="#F7F7F7">N</text>
-  <text x="15" y="24" font-family="Arial, sans-serif" font-weight="bold" font-size="20" fill="#13FF00">x</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#000000"/>
+  <g transform="translate(0 0) scale(1)">
+    <path d="M15 13 L49 51" stroke="#F7F7F7" stroke-width="6" stroke-linecap="round" fill="none"/>
+    <path d="M58 16 H44 C40 16 37.6 17.4 35.4 20.4 L13 51" stroke="#13FF00" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
 </svg>

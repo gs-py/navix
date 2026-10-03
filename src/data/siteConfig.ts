@@ -2,7 +2,7 @@ export const siteConfig = {
   name: 'Navix',
   tagline: 'We build brands that move.',
   description: 'Navix is a modern creative and digital marketing agency. Strategy, branding, content, and performance marketing that makes brands impossible to ignore.',
-  url: 'https://navix.agency',
+  url: (import.meta.env.VITE_SITE_URL as string | undefined) ?? 'https://navix.agency',
   email: 'hello@navix.agency',
   phone: '+91 98765 43210',
   location: 'Bangalore, India',

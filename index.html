@@ -2,30 +2,91 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-    <!-- Primary Meta -->
-    <title>Navix — Creative Agency | Strategy. Branding. Growth.</title>
-    <meta name="description" content="Navix is a modern creative and digital marketing agency. We build brands that move — through strategy, design, content, and performance marketing." />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://navix.agency/" />
+    <!-- Primary meta -->
+    <title>Navix — Creative &amp; Digital Marketing Agency in Bangalore</title>
+    <meta name="description" content="Navix is a Bangalore creative and digital marketing agency. Brand strategy, identity, content, social media, SEO and performance marketing that moves brands." />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="author" content="Navix" />
+    <link rel="canonical" href="%VITE_SITE_URL%/" />
 
-    <!-- Open Graph -->
+    <!-- Theme & icons -->
+    <meta name="theme-color" content="#000000" />
+    <meta name="color-scheme" content="dark light" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Open Graph (Facebook, LinkedIn, WhatsApp, Slack, Discord…) -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Navix — Creative Agency | Strategy. Branding. Growth." />
-    <meta property="og:description" content="We build brands that move — through strategy, design, content, and performance marketing." />
-    <meta property="og:url" content="https://navix.agency/" />
     <meta property="og:site_name" content="Navix" />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:url" content="%VITE_SITE_URL%/" />
+    <meta property="og:title" content="Navix — We move brands." />
+    <meta property="og:description" content="Creative and digital marketing agency in Bangalore. Strategy, branding, content and performance marketing that makes brands impossible to ignore." />
+    <meta property="og:image" content="%VITE_SITE_URL%/og-image.png" />
+    <meta property="og:image:secure_url" content="%VITE_SITE_URL%/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Navix — We move brands. Creative and digital marketing agency." />
 
-    <!-- Twitter Card -->
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Navix — Creative Agency" />
-    <meta name="twitter:description" content="We build brands that move — through strategy, design, content, and performance marketing." />
+    <meta name="twitter:title" content="Navix — We move brands." />
+    <meta name="twitter:description" content="Creative and digital marketing agency in Bangalore. Strategy, branding, content and performance marketing that makes brands impossible to ignore." />
+    <meta name="twitter:image" content="%VITE_SITE_URL%/og-image.png" />
+    <meta name="twitter:image:alt" content="Navix — We move brands. Creative and digital marketing agency." />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "ProfessionalService",
+            "@id": "%VITE_SITE_URL%/#organization",
+            "name": "Navix",
+            "description": "Creative and digital marketing agency specialising in brand strategy, identity, content, social media, SEO and performance marketing.",
+            "url": "%VITE_SITE_URL%/",
+            "logo": "%VITE_SITE_URL%/icon-512.png",
+            "image": "%VITE_SITE_URL%/og-image.png",
+            "email": "hello@navix.agency",
+            "telephone": "+91 98765 43210",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Bangalore",
+              "addressRegion": "Karnataka",
+              "addressCountry": "IN"
+            },
+            "areaServed": "IN",
+            "founder": {
+              "@type": "Person",
+              "name": "Abel James",
+              "jobTitle": "Founder",
+              "image": "%VITE_SITE_URL%/founder.png"
+            },
+            "sameAs": [
+              "https://instagram.com/navix.agency",
+              "https://linkedin.com/company/navix",
+              "https://behance.net/navix",
+              "https://dribbble.com/navix"
+            ],
+            "knowsAbout": ["Brand strategy", "Brand identity", "Social media marketing", "Content creation", "Performance marketing", "Search engine optimisation", "Web design"]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "%VITE_SITE_URL%/#website",
+            "url": "%VITE_SITE_URL%/",
+            "name": "Navix",
+            "inLanguage": "en-IN",
+            "publisher": { "@id": "%VITE_SITE_URL%/#organization" }
+          }
+        ]
+      }
+    </script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -37,6 +98,10 @@
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <h1>Navix — Creative &amp; Digital Marketing Agency in Bangalore</h1>
+      <p>We move brands through strategy, branding, content, social media, SEO and performance marketing. Contact: hello@navix.agency</p>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

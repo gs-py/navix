@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<style>
+  /* Brand fonts are bundled (variable, latin subset) so the card renders identically offline. */
+  @font-face { font-family: 'Outfit'; src: url('fonts/outfit.woff2') format('woff2'); font-weight: 100 900; font-display: block; }
+  @font-face { font-family: 'Inter'; src: url('fonts/inter.woff2') format('woff2'); font-weight: 100 900; font-display: block; }
+  /* 1200×630 social card — mirrors the live hero: headline, green X ribbon, inverted letters. */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; background: #000; }
+  .card { position: relative; width: 1200px; height: 630px; background: #000; color: #F7F7F7; font-family: 'Inter', sans-serif; overflow: hidden; }
+  .grid { position: absolute; inset: 0; background-image:
+      linear-gradient(to right, rgba(255,255,255,0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.045) 1px, transparent 1px);
+    background-size: 60px 60px; }
+  .glow { position: absolute; right: -120px; top: -160px; width: 520px; height: 520px; border-radius: 50%; background: rgba(19,255,0,0.10); filter: blur(90px); }
+  .layer { position: absolute; inset: 0; padding: 56px 72px; }
+  .top { display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 44px; letter-spacing: -0.02em; }
+  .logo b { color: #13FF00; font-weight: 700; }
+  .meta { font-size: 15px; letter-spacing: 0.28em; text-transform: uppercase; color: #888; font-weight: 500; }
+  .tag { margin-top: 46px; font-style: italic; font-weight: 400; font-size: 26px; color: #AAA; display: flex; align-items: center; gap: 22px; }
+  .tag::after { content: ''; width: 90px; height: 1px; background: #AAA; }
+  h1 { margin-top: 18px; font-family: 'Outfit', sans-serif; font-weight: 900; text-transform: uppercase; font-size: 168px; line-height: 0.8; letter-spacing: -0.045em; }
+  h1 span { display: block; }
+  h1 .l2 { padding-left: 150px; margin-top: 10px; }
+  .foot { position: absolute; left: 72px; bottom: 52px; display: flex; gap: 14px; align-items: center; font-size: 17px; color: #888; font-weight: 500; letter-spacing: 0.02em; }
+  .foot .dot { width: 5px; height: 5px; border-radius: 50%; background: #13FF00; }
+  .ribbon-svg { position: absolute; right: 0; bottom: 0; height: 630px; width: 630px; }
+  .ink { color: #000; }
+  .ink .chrome { visibility: hidden; }
+  .masked { position: absolute; inset: 0;
+    -webkit-mask-image: var(--ribbon); mask-image: var(--ribbon);
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+    -webkit-mask-size: 630px 630px; mask-size: 630px 630px;
+    -webkit-mask-position: right bottom; mask-position: right bottom; }
+  .masked .fill { position: absolute; inset: 0; background: #13FF00; }
+  .sparkle { position: absolute; right: 72px; top: 118px; width: 58px; height: 58px; color: #F7F7F7; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="grid"></div>
+  <div class="glow"></div>
+
+  <svg class="ribbon-svg" viewBox="0 0 1000 1000" fill="none">
+    <path d="M300 600 L860 1100" stroke="#13FF00" stroke-width="112" />
+    <path d="M300 600 L860 1100" stroke="#000" stroke-width="106" />
+    <path d="M1100 700 H835 C792 700 765 712 738 744 L440 1100" stroke="#13FF00" stroke-width="2.5" />
+  </svg>
+
+  <!-- Base layer: white type -->
+  <div class="layer" id="content">
+    <div class="top chrome"><div class="logo">Navi<b>x</b></div><div class="meta">Creative &amp; Digital Agency</div></div>
+    <div class="tag chrome">Your Brand Growth, Our Obsession</div>
+    <h1><span>We move</span><span class="l2">Brands.</span></h1>
+  </div>
+
+  <!-- Ribbon layer: green fill + same type in black, cut to the ribbon shape -->
+  <div class="masked">
+    <div class="fill"></div>
+    <div class="layer ink">
+      <div class="top chrome"><div class="logo">Navi<b>x</b></div><div class="meta">Creative &amp; Digital Agency</div></div>
+      <div class="tag chrome">Your Brand Growth, Our Obsession</div>
+      <h1><span>We move</span><span class="l2">Brands.</span></h1>
+    </div>
+  </div>
+
+  <svg class="sparkle" viewBox="0 0 72 72" fill="none">
+    <path d="M30 4C31.2 18.4 39.6 26.8 54 28C39.6 29.2 31.2 37.6 30 52C28.8 37.6 20.4 29.2 6 28C20.4 26.8 28.8 18.4 30 4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M58 46C58.5 52 61 54.5 67 55C61 55.5 58.5 58 58 64C57.5 58 55 55.5 49 55C55 54.5 57.5 52 58 46Z" fill="currentColor"/>
+  </svg>
+
+  <div class="foot"><span class="dot"></span>Strategy · Branding · Content · Performance Marketing<span style="margin-left:18px;color:#F7F7F7" id="host"></span></div>
+</div>
+<script>
+  // Same ribbon path the hero uses (src/components/sections/Hero.tsx → RIBBON).
+  const RIBBON = 'M1100 540 H760 C700 540 660 556 620 600 L230 1060';
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 1000'><path d='${RIBBON}' fill='none' stroke='black' stroke-width='130'/></svg>`;
+  document.documentElement.style.setProperty('--ribbon', `url("data:image/svg+xml,${encodeURIComponent(svg)}")`);
+  document.getElementById('host').textContent = new URLSearchParams(location.search).get('host') || '';
+</script>
+</body>
+</html>
