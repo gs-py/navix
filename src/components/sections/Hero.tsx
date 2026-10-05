@@ -24,7 +24,7 @@ const ribbonMask = `url("data:image/svg+xml,${encodeURIComponent(
 )}")`;
 
 const DESCRIPTION =
-  'As a modern creative and digital marketing agency in Bangalore, we obsess over brand aesthetics and craft digital experiences that deliver results — and that you will genuinely enjoy building with us.';
+  'As a modern creative and digital marketing agency in Kerala, we obsess over brand aesthetics and craft digital experiences that deliver results — and that you will genuinely enjoy building with us.';
 
 interface HeroLayerProps {
   /** Ghost layer: identical layout, black type, no chrome — rendered inside the ribbon mask. */
@@ -50,7 +50,7 @@ const HeroLayer = ({ ghost = false, spreadLeft, spreadRight, onPlay }: HeroLayer
           transition={{ duration: 1, ease: EASE_OUT_EXPO, delay: start }}
         >
           <span className="italic font-light text-[#AAAAAA] text-lg md:text-2xl lg:text-[1.75rem] tracking-tight">
-            Your Brand Growth, Our Obsession
+            Your Digital Compass
           </span>
           <motion.span
             className="hidden sm:block h-px w-16 lg:w-24 bg-[#AAAAAA] origin-left"

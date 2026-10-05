@@ -92,7 +92,7 @@ export function About() {
               <div className="border-l border-black/15 pl-6">
                 <WordsIn
                   className="text-body-lg text-[#444444] leading-relaxed"
-                  text="Navix is a Bangalore-born creative and digital marketing agency that specialises in creative advertising and full-funnel growth. As you bring unique products to market, we build distinctive campaigns that resonate with your audience — and move the numbers that matter."
+                  text="Navix is a Kerala-born creative and digital marketing agency that specialises in creative advertising and full-funnel growth. As you bring unique products to market, we build distinctive campaigns that resonate with your audience — and move the numbers that matter."
                 />
                 <div className="flex flex-wrap gap-2.5 mt-8">
                   {TAGS.map((tag, i) => (

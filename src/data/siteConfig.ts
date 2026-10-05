@@ -4,8 +4,8 @@ export const siteConfig = {
   description: 'Navix is a modern creative and digital marketing agency. Strategy, branding, content, and performance marketing that makes brands impossible to ignore.',
   url: (import.meta.env.VITE_SITE_URL as string | undefined) ?? 'https://navix.agency',
   email: 'hello@navix.agency',
-  phone: '+91 98765 43210',
-  location: 'Bangalore, India',
+  phone: '+91 75102 68128',
+  location: 'Kerala, India',
   social: {
     instagram: 'https://instagram.com/navix.agency',
     linkedin: 'https://linkedin.com/company/navix',
