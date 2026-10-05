@@ -11,7 +11,7 @@ export const services: Service[] = [
     id: 'brand-strategy',
     index: '01',
     title: 'Brand Strategy',
-    description: 'We dig deep into your market, audience, and competition to build a strategy that actually works — not just a PDF that collects dust.',
+    description: 'We dig deep into your market, audience, and competition to build a strategy that actually works, not just a PDF that collects dust.',
     capabilities: ['Market Research', 'Audience Analysis', 'Competitive Audit', 'Brand Positioning', 'Go-to-Market Strategy'],
   },
   {
@@ -60,7 +60,21 @@ export const services: Service[] = [
     id: 'creative-production',
     index: '08',
     title: 'Creative Production',
-    description: 'Photography, video, motion graphics — production that elevates your brand across every touchpoint.',
+    description: 'Photography, video and motion graphics: production that elevates your brand across every touchpoint.',
     capabilities: ['Photography', 'Video Production', 'Motion Graphics', '3D & CGI', 'Post-production'],
+  },
+  {
+    id: 'graphic-design',
+    index: '09',
+    title: 'Graphic Designing',
+    description: 'Posts, ads, print and packaging designed to one visual language, so every piece looks unmistakably yours.',
+    capabilities: ['Social Creatives', 'Ad Creatives', 'Print & Packaging', 'Brochures & Decks', 'Illustration'],
+  },
+  {
+    id: 'video-editing',
+    index: '10',
+    title: 'Video Editing',
+    description: 'Reels, ads and brand films cut for attention: tight pacing, clean motion and sound that makes people stay.',
+    capabilities: ['Reels & Shorts', 'Ad Edits', 'Motion Graphics', 'Colour Grading', 'Subtitles & Captions'],
   },
 ]

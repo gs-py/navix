@@ -58,12 +58,12 @@ export const Founder = () => (
           transition={{ duration: 1, ease: EASE_OUT_EXPO, delay: 0.2 }}
           className="relative mt-12 pl-8 border-l-2 border-[#13FF00] font-[family-name:var(--font-display)] text-2xl lg:text-[1.9rem] leading-snug font-medium"
         >
-          “Great brands aren’t the loudest in the room — they’re the ones you can’t forget. I started Navix to make every brand we touch impossible to ignore.”
+          “Great brands aren’t the loudest in the room. They’re the ones you can’t forget. I started Navix to make every brand we touch impossible to ignore.”
         </motion.blockquote>
 
         <WordsIn
           className="mt-8 text-[#888888] leading-relaxed max-w-xl"
-          text="Abel leads strategy and creative at Navix, working side by side with founders and marketing teams to turn ambitious ideas into brands that grow. Every engagement gets his direct involvement — from the first workshop to the numbers on launch day."
+          text="Abel leads strategy and creative at Navix, working side by side with founders and marketing teams to turn ambitious ideas into brands that grow. Every engagement gets his direct involvement, from the first workshop to the numbers on launch day."
         />
 
         <div className="mt-10 flex flex-wrap items-center gap-6">
@@ -73,7 +73,7 @@ export const Founder = () => (
           </div>
           <span className="hidden sm:block w-px h-10 bg-white/15" />
           <a
-            href={founder.linkedin || '#contact'}
+            href={founder.linkedin || '/#contact'}
             {...(founder.linkedin ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
             className="group inline-flex items-center gap-2 rounded-full border border-white/20 pl-5 pr-2 py-2 text-sm font-semibold hover:border-[#13FF00] hover:text-[#13FF00] transition-colors"
           >

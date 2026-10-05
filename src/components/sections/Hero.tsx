@@ -24,7 +24,7 @@ const ribbonMask = `url("data:image/svg+xml,${encodeURIComponent(
 )}")`;
 
 const DESCRIPTION =
-  'As a modern creative and digital marketing agency in Kerala, we obsess over brand aesthetics and craft digital experiences that deliver results — and that you will genuinely enjoy building with us.';
+  'As a modern creative and digital marketing agency in Kerala, we obsess over brand aesthetics and craft digital experiences that deliver results, and that you will genuinely enjoy building with us.';
 
 interface HeroLayerProps {
   /** Ghost layer: identical layout, black type, no chrome — rendered inside the ribbon mask. */
@@ -72,7 +72,7 @@ const HeroLayer = ({ ghost = false, spreadLeft, spreadRight, onPlay }: HeroLayer
       {/* Everything below sizes off the headline's em, so positions track the giant type */}
       <div className="relative text-hero mt-4 lg:mt-2">
         <h1 className={`uppercase ${type}`}>
-          <span className="sr-only">We move brands — Navix creative and digital marketing agency</span>
+          <span className="sr-only">We move brands. Navix creative and digital marketing agency</span>
           <motion.span className="block" style={{ x: spreadLeft }} aria-hidden="true">
             <CharsIn text="We move" immediate delay={start} stagger={0.09} x={100} />
           </motion.span>

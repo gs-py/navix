@@ -55,7 +55,7 @@ export const Navbar = () => {
         }`}
       >
         <nav className="container-x flex items-center justify-between" aria-label="Primary">
-          <a href="#top" aria-label="Navix home" onClick={() => setIsMenuOpen(false)}>
+          <a href="/#top" aria-label="Navix home" onClick={() => setIsMenuOpen(false)}>
             <NavixLogo variant="light" size="md" />
           </a>
 
@@ -71,7 +71,7 @@ export const Navbar = () => {
 
           <div className="flex items-center gap-5">
             <a
-              href="#contact"
+              href="/#contact"
               className="group hidden md:inline-flex items-center gap-2 rounded-full bg-[#13FF00] text-black pl-5 pr-2 py-2 text-sm font-semibold font-[family-name:var(--font-display)] transition-colors hover:bg-[#F7F7F7]"
             >
               Let's talk

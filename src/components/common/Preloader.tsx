@@ -27,7 +27,7 @@ export const Preloader = () => {
   }, [visible, progress]);
 
   return (
-    <AnimatePresence onExitComplete={() => getLenis()?.start()}>
+    <AnimatePresence onExitComplete={() => { getLenis()?.start(); if (location.hash) getLenis()?.scrollTo(location.hash, { offset: -80 }); }}>
       {visible && (
         <motion.div key="preloader" className="fixed inset-0 z-[200] pointer-events-none" aria-hidden="true">
           <motion.div

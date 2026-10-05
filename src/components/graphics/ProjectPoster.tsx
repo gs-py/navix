@@ -6,7 +6,7 @@ const loop = { repeat: Infinity, ease: 'easeInOut' as const };
 /** Animated motif per project — stands in for photography until case-study imagery exists. */
 const Motif = ({ id }: { id: string }) => {
   switch (id) {
-    case 'noir-beauty':
+    case 'bags-on-packs':
       return (
         <svg viewBox="0 0 400 500" className="absolute inset-0 w-full h-full" aria-hidden="true">
           <motion.circle cx="250" cy="200" r="130" fill="none" stroke="#F7F7F7" strokeOpacity="0.35" animate={{ r: [120, 140, 120] }} transition={{ duration: 6, ...loop }} />
@@ -14,7 +14,7 @@ const Motif = ({ id }: { id: string }) => {
           <rect x="226" y="250" width="48" height="120" rx="24" fill="none" stroke="#13FF00" strokeWidth="2" />
         </svg>
       );
-    case 'the-grand':
+    case 'interior-world':
       return (
         <svg viewBox="0 0 400 500" className="absolute inset-0 w-full h-full" aria-hidden="true">
           {[0, 1, 2].map((i) => (
@@ -29,7 +29,7 @@ const Motif = ({ id }: { id: string }) => {
           <motion.circle cx="205" cy="150" r="10" fill="#13FF00" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 3, ...loop }} />
         </svg>
       );
-    case 'pulse':
+    case 'phottam-ai':
       return (
         <svg viewBox="0 0 400 500" className="absolute inset-0 w-full h-full" aria-hidden="true">
           <motion.path
@@ -40,7 +40,7 @@ const Motif = ({ id }: { id: string }) => {
           <line x1="0" y1="260" x2="400" y2="260" stroke="#F7F7F7" strokeOpacity="0.1" />
         </svg>
       );
-    case 'root-branch':
+    case 'fabric-affair':
       return (
         <svg viewBox="0 0 400 500" className="absolute inset-0 w-full h-full" aria-hidden="true">
           {[40, 80, 120, 160].map((r, i) => (
@@ -53,7 +53,7 @@ const Motif = ({ id }: { id: string }) => {
           ))}
         </svg>
       );
-    case 'drift':
+    case 'ezka':
       return (
         <svg viewBox="0 0 400 500" className="absolute inset-0 w-full h-full" aria-hidden="true">
           {[0, 1, 2, 3, 4].map((i) => (

@@ -28,7 +28,7 @@ export const Insights = () => {
           </div>
           <div className="lg:col-span-5 lg:pl-10">
             <p className="text-[#666666] leading-relaxed">
-              Field notes from the studio — simple guides, trends and ideas to help your brand get found, get chosen and keep growing.
+              Field notes from the studio: simple guides, trends and ideas to help your brand get found, get chosen and keep growing.
             </p>
             <a href="#insights" className="group inline-flex items-center gap-2 mt-6 text-sm font-semibold uppercase tracking-wider border-b border-black pb-1">
               All articles

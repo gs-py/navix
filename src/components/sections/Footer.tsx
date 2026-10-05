@@ -31,7 +31,7 @@ export const Footer = () => {
         <div className="grid lg:grid-cols-12 gap-10 pb-16 lg:pb-24 border-b border-white/10">
           <div className="lg:col-span-7">
             <p className="text-caption text-[#888888]">Have a project in mind?</p>
-            <a href="#contact" className="group mt-5 inline-flex items-center gap-5">
+            <a href="/#contact" className="group mt-5 inline-flex items-center gap-5">
               <span className="font-[family-name:var(--font-display)] font-extrabold uppercase tracking-tight text-[clamp(2.25rem,5vw,4.5rem)] leading-[0.95] group-hover:text-[#13FF00] transition-colors">
                 Don't wait. Take a call<span className="text-[#13FF00]">!</span>
               </span>
@@ -44,7 +44,7 @@ export const Footer = () => {
             <p className="font-[family-name:var(--font-display)] font-semibold text-xl">What's moving this week</p>
             <p className="text-sm text-[#888888] mt-2">A short weekly newsletter on brand, content and growth. No spam.</p>
             {subscribed ? (
-              <p className="mt-6 text-[#13FF00]">You're on the list — see you in your inbox.</p>
+              <p className="mt-6 text-[#13FF00]">You're on the list. See you in your inbox.</p>
             ) : (
               <form onSubmit={handleSubscribe} className="mt-6 flex items-center border-b border-white/20 focus-within:border-[#13FF00] transition-colors">
                 <label htmlFor="newsletter" className="sr-only">Email address</label>

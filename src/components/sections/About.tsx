@@ -5,7 +5,7 @@ import { SectionLabel } from '../graphics/SectionLabel';
 import { Sparkle } from '../graphics/Sparkle';
 import { EASE_OUT_EXPO } from '../../lib/intro';
 
-const TAGS = ['Strategy', 'Branding', 'Content', 'Digital Marketing', 'Performance', 'Web Experiences'];
+const TAGS = ['Strategy', 'Branding', 'Content', 'Digital Marketing', 'Performance', 'Web Experiences', 'Social Media Management', 'Graphic Designing', 'Video Editing'];
 
 /** Black poster card: a mini ribbon draws itself while the whole card slowly zooms with scroll. */
 const ApproachCard = () => {
@@ -92,7 +92,7 @@ export function About() {
               <div className="border-l border-black/15 pl-6">
                 <WordsIn
                   className="text-body-lg text-[#444444] leading-relaxed"
-                  text="Navix is a Kerala-born creative and digital marketing agency that specialises in creative advertising and full-funnel growth. As you bring unique products to market, we build distinctive campaigns that resonate with your audience — and move the numbers that matter."
+                  text="Navix is a Kerala-born creative and digital marketing agency that specialises in creative advertising and full-funnel growth. As you bring unique products to market, we build distinctive campaigns that resonate with your audience and move the numbers that matter."
                 />
                 <div className="flex flex-wrap gap-2.5 mt-8">
                   {TAGS.map((tag, i) => (

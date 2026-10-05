@@ -7,7 +7,7 @@ import { EASE_OUT_EXPO } from '../../lib/intro';
 const FAQS = [
   {
     q: 'Do we really need a creative marketing agency?',
-    a: 'If your customers research online before they buy — and almost all of them do — then how your brand looks, sounds and shows up decides whether you’re found and chosen. We make that presence intentional, consistent and measurable.',
+    a: 'If your customers research online before they buy (and almost all of them do), then how your brand looks, sounds and shows up decides whether you’re found and chosen. We make that presence intentional, consistent and measurable.',
   },
   {
     q: 'Which channels are right for my business?',
@@ -19,11 +19,11 @@ const FAQS = [
   },
   {
     q: 'What ROI should we expect, and how soon?',
-    a: 'Paid performance can show results within weeks; brand, content and SEO compound over months. We agree targets up front and report on business outcomes — leads, sales, cost per acquisition — not vanity metrics.',
+    a: 'Paid performance can show results within weeks; brand, content and SEO compound over months. We agree targets up front and report on business outcomes like leads, sales and cost per acquisition, not vanity metrics.',
   },
   {
     q: 'What’s the difference between running ads and full-funnel marketing?',
-    a: 'Ads invite people to the store. Full-funnel marketing designs the entire journey — awareness, consideration, conversion and loyalty — so every rupee spent at the top keeps paying off further down.',
+    a: 'Ads invite people to the store. Full-funnel marketing designs the entire journey (awareness, consideration, conversion and loyalty) so every rupee spent at the top keeps paying off further down.',
   },
   {
     q: 'Why outsource instead of building an in-house team?',

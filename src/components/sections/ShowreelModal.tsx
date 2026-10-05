@@ -29,7 +29,7 @@ const BrandReel = () => (
         ))}
       </motion.div>
     </div>
-    <p className="absolute bottom-6 inset-x-0 text-center text-caption text-[#888888]">Showreel 2026 — full cut coming soon</p>
+    <p className="absolute bottom-6 inset-x-0 text-center text-caption text-[#888888]">Showreel 2026. Full cut coming soon</p>
   </div>
 );
 

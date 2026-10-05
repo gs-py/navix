@@ -14,7 +14,8 @@ const initials = (name: string) =>
     .split(' ')
     .map((part) => part[0])
     .join('')
-    .slice(0, 2);
+    .slice(0, 2)
+    .toUpperCase();
 
 /** Initials inside a ring that traces the autoplay timer. */
 const AvatarRing = ({ name, progress }: { name: string; progress: MotionValue<number> }) => (
@@ -166,12 +167,10 @@ export const Testimonials = () => {
 
                 <div className="mt-auto pt-10 flex flex-col md:flex-row md:items-end justify-between gap-8">
                   <div className="flex items-center gap-4">
-                    <AvatarRing name={t.name} progress={progress} />
+                    <AvatarRing name={t.company} progress={progress} />
                     <div>
-                      <p className="font-semibold">{t.name}</p>
-                      <p className="text-sm text-[#888888]">
-                        {t.position}, {t.company}
-                      </p>
+                      <p className="font-semibold">{t.company}</p>
+                      <p className="text-sm text-[#888888]">{t.position}</p>
                     </div>
                   </div>
                   <motion.div
@@ -180,11 +179,12 @@ export const Testimonials = () => {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, ease: EASE_OUT_EXPO, delay: 0.4 }}
                   >
-                    <p className="font-[family-name:var(--font-display)] font-black text-5xl lg:text-6xl text-[#13FF00] leading-none">
-                      {t.metricSuffix === '%' ? '+' : ''}
-                      <AnimatedCounter key={t.id} target={t.metric} suffix={t.metricSuffix} decimals={Number.isInteger(t.metric) ? 0 : 1} duration={1.6} />
-                    </p>
-                    <p className="mt-2 text-sm text-[#888888] max-w-[16rem] md:ml-auto">{t.metricLabel}</p>
+                    <p className="text-xs uppercase tracking-[0.15em] text-[#666666]">What we did</p>
+                    <ul className="mt-3 space-y-1.5">
+                      {t.services.map((service) => (
+                        <li key={service} className="font-[family-name:var(--font-display)] font-semibold text-[#13FF00]">{service}</li>
+                      ))}
+                    </ul>
                   </motion.div>
                 </div>
               </motion.div>

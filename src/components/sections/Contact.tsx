@@ -6,8 +6,7 @@ import { SectionLabel } from '../graphics/SectionLabel';
 import { siteConfig } from '../../data';
 import { EASE_OUT_EXPO } from '../../lib/intro';
 
-const SERVICES = ['Branding', 'Social Media', 'Performance', 'Content & UGC', 'Website', 'SEO'];
-const BUDGETS = ['Under ₹1L', '₹1L – ₹5L', '₹5L – ₹15L', '₹15L+', 'Not sure yet'];
+const SERVICES = ['Digital Marketing', 'Social Media Management', 'Website Design & Development', 'Branding', 'Graphic Designing', 'Video Editing'];
 
 const Chip = ({ label, selected, onClick }: { label: string; selected: boolean; onClick: () => void }) => (
   <button
@@ -44,12 +43,21 @@ export const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', phone: '', company: '', message: '' });
   const [services, setServices] = useState<string[]>([]);
-  const [budget, setBudget] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setForm({ ...form, [e.target.name]: e.target.value });
   const toggleService = (s: string) => setServices((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]));
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    const lines = [
+      `Hi Navix, I'm ${form.name}.`,
+      `Email: ${form.email}`,
+      form.phone && `Phone: ${form.phone}`,
+      form.company && `Company: ${form.company}`,
+      services.length > 0 && `Interested in: ${services.join(', ')}`,
+    ].filter(Boolean);
+    const text = `${lines.join('\n')}\n\n${form.message}`;
+    // Opened inside the submit handler so browsers treat it as user-initiated and don't block the new tab.
+    window.open(`https://wa.me/${siteConfig.phone.replace(/\D/g, '')}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
     setSubmitted(true);
   };
 
@@ -118,9 +126,9 @@ export const Contact = () => {
                   >
                     <CheckCircle2 size={36} />
                   </motion.div>
-                  <h3 className="font-[family-name:var(--font-display)] font-bold text-3xl uppercase">Message received</h3>
+                  <h3 className="font-[family-name:var(--font-display)] font-bold text-3xl uppercase">Almost there</h3>
                   <p className="mt-4 text-[#888888] max-w-sm">
-                    Thanks{form.name ? `, ${form.name.split(' ')[0]}` : ''}. A partner from Navix will review your project and get back to you within 24 hours.
+                    Thanks{form.name ? `, ${form.name.split(' ')[0]}` : ''}. We've opened WhatsApp with your details filled in. Just tap send and we'll get back to you within 24 hours.
                   </p>
                   <button
                     type="button"
@@ -148,15 +156,6 @@ export const Contact = () => {
                     </div>
                   </fieldset>
 
-                  <fieldset>
-                    <legend className="text-xs uppercase tracking-[0.15em] text-[#666666] mb-4">Budget</legend>
-                    <div className="flex flex-wrap gap-2.5">
-                      {BUDGETS.map((b) => (
-                        <Chip key={b} label={b} selected={budget === b} onClick={() => setBudget(b)} />
-                      ))}
-                    </div>
-                  </fieldset>
-
                   <div className="relative">
                     <textarea
                       id="message"
@@ -179,7 +178,7 @@ export const Contact = () => {
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                     <p className="text-xs text-[#666666] max-w-xs">For business enquiries only. We reply within one working day.</p>
                     <MagneticButton className="group rounded-full bg-[#13FF00] text-black pl-7 pr-2 py-2 font-[family-name:var(--font-display)] font-bold uppercase tracking-wider hover:bg-[#F7F7F7] transition-colors">
-                      Send message
+                      Send on WhatsApp
                       <span className="w-11 h-11 rounded-full bg-black text-[#13FF00] flex items-center justify-center transition-transform duration-500 group-hover:rotate-45">
                         <ArrowUpRight size={18} />
                       </span>

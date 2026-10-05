@@ -1,64 +1,54 @@
 export interface Testimonial {
   id: string
+  /** Draft wording: each quote goes live only after the named client approves it. */
   quote: string
-  name: string
   position: string
   company: string
-  /** Headline result for the engagement, e.g. 212 + '%'. */
-  metric: number
-  metricSuffix: string
-  metricLabel: string
+  /** What Navix delivered for this client, shown beside the quote. */
+  services: string[]
 }
 
 export const testimonials: Testimonial[] = [
   {
-    id: 'testimonial-1',
-    quote: 'Navix didn’t just redesign our brand — they reimagined how our audience sees us. The results have been nothing short of transformative.',
-    name: 'Arjun Mehta',
-    position: 'Founder & CEO',
-    company: 'Noir Beauty',
-    metric: 212,
-    metricSuffix: '%',
-    metricLabel: 'Growth in organic reach in six months',
+    id: 'bags-on-packs',
+    quote: 'Navix gave Bags on Packs a look and voice that finally matches the quality of our products. Our customers notice the difference in every post and every ad.',
+    position: 'Founder',
+    company: 'Bags on Packs',
+    services: ['Branding', 'Social Media Management', 'Digital Marketing'],
   },
   {
-    id: 'testimonial-2',
-    quote: 'Working with Navix felt different from day one. They think like strategists, create like artists and execute like engineers.',
-    name: 'Priya Sharma',
-    position: 'Head of Marketing',
-    company: 'The Grand',
-    metric: 3.4,
-    metricSuffix: '×',
-    metricLabel: 'More direct bookings from digital',
+    id: 'interior-world',
+    quote: 'They understood our spaces before we explained them. The content Navix creates shows our work the way we always wanted people to see it.',
+    position: 'Founder',
+    company: 'Interior World',
+    services: ['Social Media Management', 'Video Editing', 'Graphic Designing'],
   },
   {
-    id: 'testimonial-3',
-    quote: 'Our performance metrics tripled within four months. Navix brings a rare combination of creativity and data-driven thinking.',
-    name: 'Vikram Patel',
-    position: 'Co-founder',
-    company: 'Pulse Technologies',
-    metric: 61,
-    metricSuffix: '%',
-    metricLabel: 'Lower cost per acquisition',
+    id: 'fabric-affair',
+    quote: 'From our launch creatives to everyday posts, Navix keeps Fabric Affair looking premium and consistent. They feel like part of our own team.',
+    position: 'Founder',
+    company: 'Fabric Affair',
+    services: ['Branding', 'Graphic Designing', 'Social Media Management'],
   },
   {
-    id: 'testimonial-4',
-    quote: 'They understood our vision before we could fully articulate it. Navix is the creative partner every ambitious brand needs.',
-    name: 'Sneha Iyer',
-    position: 'Brand Director',
-    company: 'Drift Lifestyle',
-    metric: 1.2,
-    metricSuffix: 'M',
-    metricLabel: 'Views on our launch campaign',
+    id: 'phottam-ai',
+    quote: 'Explaining an AI product simply is hard. Navix turned Phottam AI into a brand people get in seconds, with a website that does the selling for us.',
+    position: 'Founder',
+    company: 'Phottam AI',
+    services: ['Website Design & Development', 'Branding', 'Digital Marketing'],
   },
   {
-    id: 'testimonial-5',
-    quote: 'Reliable, sharp and genuinely invested. Every month the team brings ideas we didn’t ask for — and they usually become our best performers.',
-    name: 'Karthik Rao',
-    position: 'COO',
-    company: 'Hexa',
-    metric: 48,
-    metricSuffix: '%',
-    metricLabel: 'Increase in qualified demo requests',
+    id: 'ezka',
+    quote: 'Navix brings ideas every month that we would never have thought of, and they are usually the ones that perform best for EZKA.',
+    position: 'Founder',
+    company: 'EZKA',
+    services: ['Digital Marketing', 'Social Media Management', 'Video Editing'],
+  },
+  {
+    id: 'brandlab-7',
+    quote: 'Sharp thinking, quick turnarounds and a real eye for design. Working with Navix made BrandLab 7 stronger in everything we put out.',
+    position: 'Founder',
+    company: 'BrandLab 7',
+    services: ['Graphic Designing', 'Video Editing', 'Website Design & Development'],
   },
 ]

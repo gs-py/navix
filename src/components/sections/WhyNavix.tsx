@@ -5,9 +5,9 @@ import { SectionLabel } from '../graphics/SectionLabel';
 import { EASE_OUT_EXPO } from '../../lib/intro';
 
 const BELIEFS = [
-  { value: 95, title: 'Creativity', text: 'Ideas with a point of view, built to reach the right audience — never decoration for its own sake.' },
+  { value: 95, title: 'Creativity', text: 'Ideas with a point of view, built to reach the right audience, never decoration for its own sake.' },
   { value: 90, title: 'Consistency', text: 'Promises kept and deliverables on time, every month. Momentum is a strategy.' },
-  { value: 100, title: 'Coffee', text: 'Yes, coffee. We brainstorm, plan and create — all of it fuelled by far too much filter coffee.' },
+  { value: 100, title: 'Coffee', text: 'Yes, coffee. We brainstorm, plan and create, all of it fuelled by far too much filter coffee.' },
 ];
 
 const STATS = [
@@ -67,7 +67,7 @@ export const WhyNavix = () => {
             </h3>
             <WordsIn
               className="mt-8 text-body-lg text-[#888888] leading-relaxed"
-              text="We're driven by creativity, innovation and a genuine obsession with your growth. Strategy before noise, craft with purpose, and outcomes you can measure — that's the deal."
+              text="We're driven by creativity, innovation and a genuine obsession with your growth. Strategy before noise, craft with purpose, and outcomes you can measure. That's the deal."
             />
           </div>
           <div className="lg:col-span-7">
@@ -77,7 +77,7 @@ export const WhyNavix = () => {
           </div>
         </div>
 
-        <div className="container-x relative mt-20 lg:mt-28 grid grid-cols-2 lg:grid-cols-4 border-t border-l border-white/10">
+        <div className="hidden container-x relative mt-20 lg:mt-28 grid grid-cols-2 lg:grid-cols-4 border-t border-l border-white/10">
           {STATS.map((stat, i) => (
             <BounceIn key={stat.label} delay={i * 0.18} className="border-r border-b border-white/10 p-6 md:p-10">
               <p className="font-[family-name:var(--font-display)] font-black text-[clamp(3rem,6vw,5.5rem)] leading-none tracking-tight">

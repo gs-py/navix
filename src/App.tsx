@@ -19,6 +19,10 @@ import {
 } from './components/sections'
 import { useLenis } from './hooks'
 
+// Only two pages, so the path is matched directly instead of pulling in a router.
+const isAboutPage = window.location.pathname.replace(/\/$/, '') === '/about'
+if (isAboutPage) document.title = 'About | Navix'
+
 function App() {
   useLenis()
 
@@ -26,11 +30,15 @@ function App() {
     <CursorProvider>
       <Preloader />
       <Navbar />
+      {isAboutPage ? (
+        <main className="pt-20">
+          <Founder />
+        </main>
+      ) : (
       <main>
         <Hero />
         <XTicker />
         <About />
-        <Founder />
         <Services />
         <Process />
         <ClientMarquee />
@@ -42,6 +50,7 @@ function App() {
         <Contact />
         <FAQ />
       </main>
+      )}
       <Footer />
       <div className="grain" aria-hidden="true" />
     </CursorProvider>

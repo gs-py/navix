@@ -14,7 +14,7 @@ export const processSteps: ProcessStep[] = [
     letter: 'M',
     title: 'Map',
     tagline: 'Research & observation',
-    description: 'We study your market, audience and competitors until the real opportunity is obvious — through data, social listening and honest conversations with your customers.',
+    description: 'We study your market, audience and competitors until the real opportunity is obvious, through data, social listening and honest conversations with your customers.',
     deliverables: ['Market & audience research', 'Competitor audit', 'Brand health check'],
   },
   {
@@ -30,7 +30,7 @@ export const processSteps: ProcessStep[] = [
     letter: 'V',
     title: 'Visualise',
     tagline: 'Design & production',
-    description: 'Identity, content, campaigns and web — crafted for each platform and produced in-house so the idea lands with the same force everywhere.',
+    description: 'Identity, content, campaigns and web, crafted for each platform and produced in-house so the idea lands with the same force everywhere.',
     deliverables: ['Identity systems', 'Content & UGC production', 'Websites & landing pages'],
   },
   {
@@ -38,7 +38,7 @@ export const processSteps: ProcessStep[] = [
     letter: 'E',
     title: 'Execute',
     tagline: 'Launch, measure, scale',
-    description: 'We launch across every channel, then optimise every week — scaling what works, cutting what doesn’t and reporting on the numbers that matter.',
+    description: 'We launch across every channel, then optimise every week, scaling what works, cutting what doesn’t and reporting on the numbers that matter.',
     deliverables: ['Media & launch plan', 'Performance dashboards', 'Ongoing optimisation'],
   },
 ]

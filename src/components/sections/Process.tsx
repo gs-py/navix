@@ -43,7 +43,7 @@ const StepDetail = ({ step, index }: { step: ProcessStep; index: number }) => {
       </div>
       <div className="col-span-8 lg:col-span-5">
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-[#666666]">
-          {String(index + 1).padStart(2, '0')} — {step.tagline}
+          {String(index + 1).padStart(2, '0')} · {step.tagline}
         </p>
         <h3 className="mt-3 font-[family-name:var(--font-display)] font-extrabold uppercase tracking-tight text-4xl lg:text-6xl leading-none">
           {step.title}
